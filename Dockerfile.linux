@@ -1,0 +1,20 @@
+FROM lacledeslan/gamesvr:srcds.linux
+
+MAINTAINER Laclede's LAN <contact@lacledeslan.com>
+
+ENV SERVER_NAME="gamesvr-dods.linux"
+
+WORKDIR /app/bin/
+
+# Install GoldSource Dedicated Server
+RUN mkdir /app/bin --parents &&\
+	# Download &&\
+		/app/steamcmd/steamcmd.sh \
+			+login anonymous \
+			+force_install_dir /app/bin/ \
+			+app_update 90 validate \
+			+quit
+	
+COPY ./dist/ /app/bin/
+
+CMD ["/bin/bash"]

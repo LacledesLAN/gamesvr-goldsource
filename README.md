@@ -1,1 +1,1 @@
-# gamesvr-goldsource
+# gamesvr-srcds-goldsource

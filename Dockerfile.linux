@@ -31,7 +31,7 @@ RUN echo "Downloading cstrike maps from content server" &&`
 		mkdir --parents /app/bin/cstrike/maps/ &&`
 		mv /tmp/maps/*.* /app/bin/cstrike/maps/ &&`
 	echo "Performing Cleanup" &&`
-		rm -rf /tmp/*;
+		rm -rf /tmp/maps;
 
 # Half-Life Deathmatch Maps
 RUN echo "Downloading hldm maps from content server" &&` 
@@ -48,7 +48,7 @@ RUN echo "Downloading hldm maps from content server" &&`
 		mkdir --parents /app/bin/valve/maps/ &&`
 		mv /tmp/maps/*.* /app/bin/valve/maps/ &&`
 	echo "Performing Cleanup" &&`
-		rm -rf /tmp/*;
+		rm -rf /tmp/maps;
 
 # Half-Life Deathmatch Models
 RUN echo "Downloading hldm models from content server" &&`
@@ -62,7 +62,7 @@ RUN echo "Downloading hldm models from content server" &&`
 		mkdir --parents /app/bin/valve/models/ &&`
 		mv  /tmp/models/* /app/bin/valve/models/ &&`
 	echo "Performing Cleanup" &&`
-		rm -rf /tmp/*;
+		rm -rf /tmp/models;
 
 # Copy files (if any) from the build-cache
 COPY ./build-cache/ /app/bin/

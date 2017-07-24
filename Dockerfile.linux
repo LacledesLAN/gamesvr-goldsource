@@ -2,11 +2,19 @@
 
 FROM lacledeslan/gamesvr-srcds:linux
 
-MAINTAINER Laclede's LAN <contact@lacledeslan.com>
+LABEL maintainer "Laclede's LAN <contact@lacledeslan.com>"
 
-ENV SERVER_NAME="gamesvr-srcds-goldsource:linux"
+ENV IMAGE="lacledeslan/gamesvr-srcds-goldsource:linux"
 
-USER root
+RUN useradd `
+		--home /app/bin `
+		--gid srcds `
+		--shell /bin/bash `
+		--system `
+		GoldSource &&`
+	chown -R GoldSource:srcds /app/bin
+
+USER GoldSource
 
 # Counter-Strike 1.6 Maps
 RUN echo "Downloading cstrike maps from content server" &&` 
@@ -56,9 +64,11 @@ RUN echo "Downloading hldm models from content server" &&`
 	echo "Performing Cleanup" &&`
 		rm -rf /tmp/*;
 
+# Copy files (if any) from the build-cache
+COPY ./build-cache/ /app/bin/
+
 # Install GoldSource Dedicated Server
-RUN mkdir /app/bin --parents &&`
-	# Download &&`
+RUN echo "Downloading GoldSource via SteamCMD" &&`
 		/app/steamcmd/steamcmd.sh `
 			+login anonymous `
 			+force_install_dir /app/bin/ `
@@ -69,4 +79,4 @@ COPY ./dist/ /app/bin/
 
 WORKDIR /app/bin/
 
-CMD ["/bin/bash"]
+ONBUILD USER root

@@ -89,7 +89,7 @@ RUN echo $'\n\nDownloading Gold Source via SteamCMD' &&`
         /app/steamcmd/steamcmd.sh `
             +login anonymous `
             +force_install_dir /app `
-            +app_update 90 validate `
+            +app_update "90 -beta Beta" validate `
             +quit;
 
 ## Add in tests

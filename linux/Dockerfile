@@ -85,26 +85,51 @@ COPY ./build-cache /app
 COPY --from=goldsource-builder /app /app/steamcmd
 
 # Install Gold Source
-RUN echo $'\n\nDownloading Gold Source via SteamCMD' &&`
-        /app/steamcmd/steamcmd.sh `
-            +login anonymous `
-            +force_install_dir /app `
-            +app_update 90 validate `
-            +quit;
+#RUN echo $'\n\nDownloading Gold Source via SteamCMD' &&`
+#        /app/steamcmd/steamcmd.sh `
+#            +login anonymous `
+#            +force_install_dir /app `
+#            +app_update 90 validate `
+#            +quit;
 
-# October 2017 SteamCMD bug - x12 times hack
-RUN /app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 validate +quit;
-RUN /app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 validate +quit;
-RUN /app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 validate +quit;
-RUN /app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 validate +quit;
-RUN /app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 validate +quit;
-RUN /app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 validate +quit;
-RUN /app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 validate +quit;
-RUN /app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 validate +quit;
-RUN /app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 validate +quit;
-RUN /app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 validate +quit;
-RUN /app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 validate +quit;
-RUN /app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 validate +quit;
+# Work around for https://github.com/ValveSoftware/steam-for-linux/issues/4950
+COPY ./HLDS-appmanifest-hack /manifests-hack
+
+RUN echo $'Counter-Strike 1.6' `
+		rm -rf /app/steamapps/* `
+		mv /manifests-hack/CounterStrike /app/steamapps `
+		/app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 +app_set_config "90 mod cstrike" +quit; `
+	echo $'Counter-Strike: Condition Zero' `
+		rm -rf /app/steamapps/* `
+		mv /manifests-hack/CounterStrikeConditionZero /app/steamapps `
+		/app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 +app_set_config "90 mod czero" +quit; `
+	echo $'Day of Defeat' `
+		rm -rf /app/steamapps/* `
+		mv /manifests-hack/DayOfDefeat /app/steamapps `
+		/app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 +app_set_config "90 mod dod" +quit; `
+	echo $'Deathmatch Classic' `
+		rm -rf /app/steamapps/* `
+		mv /manifests-hack/DeathmatchClassic /app/steamapps `
+		/app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 +app_set_config "90 mod dmc" +quit; `
+	echo $'Half-Life: Opposing Force' `
+		rm -rf /app/steamapps/* `
+		mv /manifests-hack/OpposingForce /app/steamapps `
+		/app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 +app_set_config "90 mod gearbox" +quit; `
+	echo $'Ricochet' `
+		rm -rf /app/steamapps/* `
+		mv /manifests-hack/Ricochet /app/steamapps `
+		/app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 +app_set_config "90 mod ricochet" +quit; `
+	echo $'Team Fortress Classic' `
+		rm -rf /app/steamapps/* `
+		mv /manifests-hack/TeamFortressClassic /app/steamapps `
+		/app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 +app_set_config "90 mod tfc" +quit; `
+	echo $'Half-Life Deathmatch' `
+		rm -rf /app/steamapps/* `
+		mv /manifests-hack/HalfLifeDeathmatch /app/steamapps `
+		/app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 +app_set_config "90 mod tfc" +quit;
+
+# RUN /app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 validate +quit; `
+
 
 ## Add in tests
 COPY ./tests /app/ll-tests

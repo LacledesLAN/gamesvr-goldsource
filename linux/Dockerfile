@@ -85,16 +85,12 @@ COPY ./build-cache /app
 COPY --from=goldsource-builder /app /app/steamcmd
 
 # Install Gold Source
-RUN echo $'\n\nDownloading Counter-Strike: Global Offensive via SteamCMD' &&`
+RUN echo $'\n\nDownloading Gold Source via SteamCMD' &&`
         /app/steamcmd/steamcmd.sh `
             +login anonymous `
             +force_install_dir /app `
             +app_update 90 validate `
             +quit;
-
-RUN echo $'\n\nLinking steamclient.so to prevent srcds_run errors' &&`
-        mkdir --parents /app/.steam/sdk32 &&`
-        ln -s /app/bin/steamclient.so /app/.steam/sdk32/steamclient.so
 
 ## Add in tests
 COPY ./tests /app/ll-tests

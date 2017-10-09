@@ -126,10 +126,7 @@ RUN echo $'Counter-Strike 1.6' &&`
 	echo $'Half-Life Deathmatch' &&`
 		rm -rf /app/steamapps/* &&`
 		mv /manifests-hack/HalfLifeDeathmatch /app/steamapps &&`
-		/app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 +app_set_config "90 mod tfc" +quit;
-
-# RUN /app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 validate +quit; `
-
+		/app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 validate +quit;
 
 ## Add in tests
 COPY ./tests /app/ll-tests

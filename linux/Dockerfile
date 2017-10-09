@@ -92,13 +92,19 @@ RUN echo $'\n\nDownloading Gold Source via SteamCMD' &&`
             +app_update 90 validate `
             +quit;
 
-# October 2017 SteamCMD bug - running twice
-RUN echo $'\n\nDownloading Gold Source via SteamCMD' &&`
-        /app/steamcmd/steamcmd.sh `
-            +login anonymous `
-            +force_install_dir /app `
-            +app_update 90 validate `
-            +quit;
+# October 2017 SteamCMD bug - x12 times hack
+RUN /app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 validate +quit;
+RUN /app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 validate +quit;
+RUN /app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 validate +quit;
+RUN /app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 validate +quit;
+RUN /app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 validate +quit;
+RUN /app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 validate +quit;
+RUN /app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 validate +quit;
+RUN /app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 validate +quit;
+RUN /app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 validate +quit;
+RUN /app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 validate +quit;
+RUN /app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 validate +quit;
+RUN /app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 validate +quit;
 
 ## Add in tests
 COPY ./tests /app/ll-tests

@@ -2,6 +2,18 @@
 
 FROM lacledeslan/steamcmd:linux as goldsource-builder
 
+# October 2017 SteamCMD bug
+RUN mkdir /output/steamapps `
+    cd /output/steamapps/ `
+	for i in 10 70 90; do wget -q https://raw.githubusercontent.com/dgibbs64/HLDS-appmanifest/master/CounterStrike/appmanifest_$i.acf -O appmanifest_$i.acf; done `
+	for i in 10 70 80 90; do wget -q https://raw.githubusercontent.com/dgibbs64/HLDS-appmanifest/master/CounterStrikeConditionZero/appmanifest_$i.acf -O appmanifest_$i.acf; done `
+	for i in 10 30 70 90; do wget -q https://raw.githubusercontent.com/dgibbs64/HLDS-appmanifest/master/DayOfDefeat/appmanifest_$i.acf -O appmanifest_$i.acf; done `
+	for i in 10 40 70 90; do wget -q https://raw.githubusercontent.com/dgibbs64/HLDS-appmanifest/master/DeathmatchClassic/appmanifest_$i.acf -O appmanifest_$i.acf; done `
+	for i in 10 70 90; do wget -q https://raw.githubusercontent.com/dgibbs64/HLDS-appmanifest/master/HalfLifeDeathmatch/appmanifest_$i.acf -O appmanifest_$i.acf; done `
+	for i in 10 50 70 90; do wget -q https://raw.githubusercontent.com/dgibbs64/HLDS-appmanifest/master/OpposingForce/appmanifest_$i.acf -O appmanifest_$i.acf; done `
+	for i in 10 60 70 90; do wget -q https://raw.githubusercontent.com/dgibbs64/HLDS-appmanifest/master/Ricochet/appmanifest_$i.acf -O appmanifest_$i.acf; done `
+	for i in 10 20 70 90; do wget -q https://raw.githubusercontent.com/dgibbs64/HLDS-appmanifest/master/TeamFortressClassic/appmanifest_$i.acf -O appmanifest_$i.acf; done
+
 # Counter-Strike 1.6 Maps
 RUN echo "Downloading cstrike maps from content server" &&` 
 	mkdir --parents /tmp/maps/ &&`
@@ -89,7 +101,15 @@ RUN echo $'\n\nDownloading Gold Source via SteamCMD' &&`
         /app/steamcmd/steamcmd.sh `
             +login anonymous `
             +force_install_dir /app `
-            +app_update "90 -beta Beta" validate `
+            +app_update 90 validate `
+            +quit;
+
+# October 2017 SteamCMD bug
+RUN echo $'\n\nDownloading Gold Source via SteamCMD' &&`
+        /app/steamcmd/steamcmd.sh `
+            +login anonymous `
+            +force_install_dir /app `
+            +app_update 90 validate `
             +quit;
 
 ## Add in tests

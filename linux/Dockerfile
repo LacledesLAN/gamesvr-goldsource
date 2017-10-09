@@ -14,8 +14,8 @@ RUN echo "Downloading cstrike maps from content server" &&`
 		bzip2 --decompress /tmp/maps/*.*.bz2 &&`
 		rm -f /tmp/maps/*.bz2 &&`
 	echo "Moving uncompressed map files to destination" &&`
-		mkdir --parents /app/cstrike/maps/ &&`
-		mv /tmp/maps/*.* /app/cstrike/maps/ &&`
+		mkdir --parents /output/cstrike/maps/ &&`
+		mv /tmp/maps/*.* /output/cstrike/maps/ &&`
 	echo "Performing Cleanup" &&`
 		rm -rf /tmp/maps;
 
@@ -31,8 +31,8 @@ RUN echo "Downloading hldm maps from content server" &&`
 		bzip2 --decompress /tmp/maps/*.*.bz2 &&`
 		rm -f /tmp/maps/*.bz2 &&`
 	echo "Moving uncompressed map files to destination" &&`
-		mkdir --parents /app/valve/maps/ &&`
-		mv /tmp/maps/*.* /app/valve/maps/ &&`
+		mkdir --parents /output/valve/maps/ &&`
+		mv /tmp/maps/*.* /output/valve/maps/ &&`
 	echo "Performing Cleanup" &&`
 		rm -rf /tmp/maps;
 
@@ -45,8 +45,8 @@ RUN echo "Downloading hldm models from content server" &&`
 		-nH --no-verbose --cut-dirs 4 &&`
 		rm -f .listing &&`
 	echo "Moving model files to destination" &&`
-		mkdir --parents /app/valve/models/ &&`
-		mv  /tmp/models/* /app/valve/models/ &&`
+		mkdir --parents /output/valve/models/ &&`
+		mv  /tmp/models/* /output/valve/models/ &&`
 	echo "Performing Cleanup" &&`
 		rm -rf /tmp/models;
 

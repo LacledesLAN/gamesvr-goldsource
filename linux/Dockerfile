@@ -3,7 +3,7 @@
 FROM lacledeslan/steamcmd:linux as goldsource-builder
 
 # October 2017 SteamCMD bug
-RUN mkdir /output/steamapps `
+RUN mkdir --parents /output/steamapps `
     cd /output/steamapps/ `
 	for i in 10 70 90; do wget -q https://raw.githubusercontent.com/dgibbs64/HLDS-appmanifest/master/CounterStrike/appmanifest_$i.acf -O appmanifest_$i.acf; done `
 	for i in 10 70 80 90; do wget -q https://raw.githubusercontent.com/dgibbs64/HLDS-appmanifest/master/CounterStrikeConditionZero/appmanifest_$i.acf -O appmanifest_$i.acf; done `

@@ -97,42 +97,42 @@ COPY ./HLDS-appmanifest-hack /manifests-hack
 
 RUN echo $'Counter-Strike 1.6' &&`
 		rm -rf /app/steamapps/* &&`
-		mv /manifests-hack/CounterStrike /app/steamapps &&`
+		mv /manifests-hack/CounterStrike/*.acf /app/steamapps/*.acf &&`
 		/app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 +app_set_config "90 mod cstrike" +quit;
 	
 RUN echo $'Counter-Strike: Condition Zero' &&`
 		rm -rf /app/steamapps/* &&`
-		mv /manifests-hack/CounterStrikeConditionZero /app/steamapps &&`
+		mv /manifests-hack/CounterStrikeConditionZero/*.acf /app/steamapps/*.acf &&`
 		/app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 +app_set_config "90 mod czero" +quit;
 
 RUN echo $'Day of Defeat' &&`
 		rm -rf /app/steamapps/* &&`
-		mv /manifests-hack/DayOfDefeat /app/steamapps &&`
+		mv /manifests-hack/DayOfDefeat/*.acf /app/steamapps/*.acf &&`
 		/app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 +app_set_config "90 mod dod" +quit;
 
 RUN echo $'Deathmatch Classic' &&`
 		rm -rf /app/steamapps/* &&`
-		mv /manifests-hack/DeathmatchClassic /app/steamapps `
+		mv /manifests-hack/DeathmatchClassic/*.acf /app/steamapps/*.acf &&`
 		/app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 +app_set_config "90 mod dmc" +quit;
 
 RUN echo $'Half-Life: Opposing Force' &&`
 		rm -rf /app/steamapps/* &&`
-		mv /manifests-hack/OpposingForce /app/steamapps &&`
+		mv /manifests-hack/OpposingForce/*.acf /app/steamapps/*.acf &&`
 		/app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 +app_set_config "90 mod gearbox" +quit;
 
 RUN echo $'Ricochet' &&`
 		rm -rf /app/steamapps/* &&`
-		mv /manifests-hack/Ricochet /app/steamapps &&`
+		mv /manifests-hack/Ricochet/*.acf /app/steamapps/*.acf &&`
 		/app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 +app_set_config "90 mod ricochet" +quit;
 
 RUN echo $'Team Fortress Classic' &&`
 		rm -rf /app/steamapps/* &&`
-		mv /manifests-hack/TeamFortressClassic /app/steamapps &&`
+		mv /manifests-hack/TeamFortressClassic/*.acf /app/steamapps/*.acf &&`
 		/app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 +app_set_config "90 mod tfc" +quit;
 
 RUN echo $'Half-Life Deathmatch' &&`
 		rm -rf /app/steamapps/* &&`
-		mv /manifests-hack/HalfLifeDeathmatch /app/steamapps &&`
+		mv /manifests-hack/HalfLifeDeathmatch/*.acf /app/steamapps/*.acf &&`
 		/app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 validate +quit;
 
 ## Add in tests

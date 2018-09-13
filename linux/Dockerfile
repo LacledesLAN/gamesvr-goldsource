@@ -2,61 +2,126 @@
 
 FROM lacledeslan/steamcmd:linux as goldsource-builder
 
+ARG contentServer=content.lacledeslan.net
+
+USER SteamCMD
+
 # Counter-Strike 1.6 Maps
-RUN echo "Downloading cstrike maps from content server" &&` 
-	mkdir --parents /tmp/maps/ &&`
-	cd /tmp/maps/ &&`
-	wget -m ` 	
-		ftp://llgameserverbot:6gDyfNJhm4UsraE5@raw.content.lacledeslan.net/hldm/maps/ ` 
-		-nH --no-verbose --cut-dirs 4 &&`
-		rm -f .listing &&` 
+RUN echo $'Downloading LL custom cstrike maps from content server' &&`
+		mkdir --parents /tmp/maps/ &&`
+		cd /tmp/maps/ &&`
+		wget -rkp -l 1 -nH --no-verbose --cut-dirs=3 -R "*.htm*" -e robots=off "http://"$contentServer"/fastDownloads/cstrike/maps/" &&`
 	echo "Decompressing map files" &&`
-		bzip2 --decompress /tmp/maps/*.*.bz2 &&`
-		rm -f /tmp/maps/*.bz2 &&`
+		bzip2 --decompress /tmp/maps/*.bz2 &&`
 	echo "Moving uncompressed map files to destination" &&`
 		mkdir --parents /output/cstrike/maps/ &&`
-		mv /tmp/maps/*.* /output/cstrike/maps/ &&`
-	echo "Performing Cleanup" &&`
-		rm -rf /tmp/maps;
+		mv -n /tmp/maps/*.bsp /output/cstrike/maps/;
 
 # Half-Life Deathmatch Maps
-RUN echo "Downloading hldm maps from content server" &&` 
-	mkdir --parents /tmp/maps/ &&`
-	cd /tmp/maps/ &&`
-	wget -m ` 	
-		ftp://llgameserverbot:6gDyfNJhm4UsraE5@raw.content.lacledeslan.net/hldm/maps/ ` 
-		-nH --no-verbose --cut-dirs 4 &&`
-		rm -f .listing &&` 
+RUN echo $'Downloading LL custom hldm maps from content server' &&`
+		mkdir --parents /tmp/maps/ &&`
+		cd /tmp/maps/ &&`
+		wget -rkp -l 1 -nH --no-verbose --cut-dirs=3 -R "*.htm*" -e robots=off "http://"$contentServer"/fastDownloads/hldm/maps/" &&`
 	echo "Decompressing map files" &&`
-		bzip2 --decompress /tmp/maps/*.*.bz2 &&`
-		rm -f /tmp/maps/*.bz2 &&`
+		bzip2 --decompress /tmp/maps/*.bz2 &&`
 	echo "Moving uncompressed map files to destination" &&`
 		mkdir --parents /output/valve/maps/ &&`
-		mv /tmp/maps/*.* /output/valve/maps/ &&`
-	echo "Performing Cleanup" &&`
-		rm -rf /tmp/maps;
+		mv -n /tmp/maps/*.bsp /output/valve/maps/;
 
 # Half-Life Deathmatch Models
-RUN echo "Downloading hldm models from content server" &&`
-	mkdir --parents /tmp/models/ &&`
-	cd /tmp/models/ &&`
-	wget -m `
-		ftp://llgameserverbot:6gDyfNJhm4UsraE5@raw.content.lacledeslan.net/hldm/models/ `
-		-nH --no-verbose --cut-dirs 4 &&`
-		rm -f .listing &&`
+RUN echo "Downloading LL custom hldm models from content server" &&`
+		mkdir --parents /tmp/models/ &&`
+		cd /tmp/models/ &&`
+		wget -rkp -l 2 -nH --no-verbose --cut-dirs=3 -R "*.htm*" -R "*.ico" -R "*.md" -R "*.png" -e robots=off "http://"$contentServer"/fastDownloads/hldm/models/" &&`
 	echo "Moving model files to destination" &&`
 		mkdir --parents /output/valve/models/ &&`
-		mv  /tmp/models/* /output/valve/models/ &&`
-	echo "Performing Cleanup" &&`
-		rm -rf /tmp/models;
+		mv -n /tmp/models/* /output/valve/models/;
 
-#=======================================================================
+### ⚠⚠ Steam AppId 90 currently require multiple installs https://github.com/ValveSoftware/steam-for-linux/issues/4950
+###	⚠⚠ workaround via http://danielgibbs.co.uk/2017/10/hlds-steamcmd-workaround-appid-90-part-ii/#
+
+RUN echo $'\n\n\n\n\nCounter-Strike 1.6' &&`
+	for i in 10 70 90; do wget -P /output -q https://raw.githubusercontent.com/LacledesLAN/HLDS-appmanifest/master/CounterStrike/appmanifest_$i.acf -O appmanifest_$i.acf; done &&`
+	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod cstrike validate +quit &&`
+	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod cstrike validate +quit &&`
+	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod cstrike validate +quit &&`
+	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod cstrike validate +quit &&`
+	for i in 10 70 90; do rm -f /output/appmanifest_$i.acf; done;
+
+RUN echo $'\n\n\n\n\nCounter-Strike: Condition Zero\n===================================\n' &&`
+	for i in 10 70 80 90; do wget -P /output -q https://raw.githubusercontent.com/LacledesLAN/HLDS-appmanifest/master/CounterStrikeConditionZero/appmanifest_$i.acf -O appmanifest_$i.acf; done &&`
+	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod czero validate +quit &&`
+	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod czero validate +quit &&`
+	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod czero validate +quit &&`
+	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod czero validate +quit &&`
+	for i in 10 70 80 90; do rm -f /output/appmanifest_$i.acf; done;
+
+RUN echo $'\n\n\n\n\nDay of Defeat\n===================================\n' &&`
+	for i in 10 30 70 90; do wget -P /output -q https://raw.githubusercontent.com/LacledesLAN/HLDS-appmanifest/master/DayOfDefeat/appmanifest_$i.acf -O appmanifest_$i.acf; done &&`
+	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod dod validate +quit &&`
+	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod dod validate +quit &&`
+	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod dod validate +quit &&`
+	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod dod validate +quit &&`
+	for i in 10 30 70 90; do rm -f /output/appmanifest_$i.acf; done;
+
+RUN echo $'\n\n\n\n\nDeathmatch Classic\n===================================\n' &&`
+	for i in 10 40 70 90; do wget -P /output -q https://raw.githubusercontent.com/LacledesLAN/HLDS-appmanifest/master/DeathmatchClassic/appmanifest_$i.acf -O appmanifest_$i.acf; done &&`
+	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod dmc validate +quit &&`
+	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod dmc validate +quit &&`
+	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod dmc validate +quit &&`
+	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod dmc validate +quit &&`
+	for i in 10 40 70 90; do rm -f /output/appmanifest_$i.acf; done;
+
+RUN echo $'\n\n\n\n\nHalf-Life: Deathmatch\n===================================\n' &&`
+	for i in 10 70 90; do wget -P /output -q https://raw.githubusercontent.com/LacledesLAN/HLDS-appmanifest/master/HalfLifeDeathmatch/appmanifest_$i.acf -O appmanifest_$i.acf; done &&`
+	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 validate +quit &&`
+	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 validate +quit &&`
+	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 validate +quit &&`
+	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 validate +quit &&`
+	for i in 10 70 90; do rm -f /output/appmanifest_$i.acf; done;
+
+RUN echo $'\n\n\n\n\nOpposing Force\n===================================\n' &&`
+	for i in 10 50 70 90; do wget -P /output -q https://raw.githubusercontent.com/LacledesLAN/HLDS-appmanifest/master/OpposingForce/appmanifest_$i.acf -O appmanifest_$i.acf; done &&`
+	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod gearbox validate +quit &&`
+	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod gearbox validate +quit &&`
+	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod gearbox validate +quit &&`
+	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod gearbox validate +quit &&`
+	for i in 10 50 70 90; do rm -f /output/appmanifest_$i.acf; done;
+
+RUN echo $'\n\n\n\n\nRicochet\n===================================\n' &&`
+	for i in 10 60 70 90; do wget -P /output -q https://raw.githubusercontent.com/LacledesLAN/HLDS-appmanifest/master/Ricochet/appmanifest_$i.acf -O appmanifest_$i.acf; done &&`
+	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod ricochet validate +quit &&`
+	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod ricochet validate +quit &&`
+	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod ricochet validate +quit &&`
+	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod ricochet validate +quit &&`
+	for i in 10 60 70 90; do rm -f /output/appmanifest_$i.acf; done;
+
+RUN echo $'\n\n\n\n\nTeam Fortress Classic\n===================================\n' &&`
+	for i in 10 20 70 90; do wget -P /output -q https://raw.githubusercontent.com/LacledesLAN/HLDS-appmanifest/master/TeamFortressClassic/appmanifest_$i.acf -O appmanifest_$i.acf; done &&`
+	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod tfc validate +quit &&`
+	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod tfc validate +quit &&`
+	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod tfc validate +quit &&`
+	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod tfc validate +quit &&`
+	for i in 10 20 70 90; do rm -f /output/appmanifest_$i.acf; done;
+
+RUN echo 90 > /output/steam_appid.txt;
+
+#####=======================================================================
 FROM debian:stretch-slim
-
-HEALTHCHECK NONE
 
 ARG BUILDNODE="unspecified"
 ARG SOURCE_COMMIT
+
+HEALTHCHECK NONE
+
+RUN dpkg --add-architecture i386 &&`
+    apt-get update && apt-get install -y `
+        ca-certificates lib32gcc1 lib32tinfo5 libcurl4-gnutls-dev:i386 libstdc++6 libstdc++6:i386 locales locales-all tmux &&`
+		apt-get clean && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/* &&`
+	echo "LC_ALL=en_US.UTF-8" >> /etc/environment &&`
+	useradd --home /app --gid root --system GoldSource
+
+ENV LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8 LC_ALL=en_US.UTF-8
 
 LABEL maintainer="Laclede's LAN <contact @lacledeslan.com>" `
       com.lacledeslan.build-node=$BUILDNODE `
@@ -67,88 +132,16 @@ LABEL maintainer="Laclede's LAN <contact @lacledeslan.com>" `
       org.label-schema.description="Gold Source Server in Docker" `
       org.label-schema.vcs-url="https://github.com/LacledesLAN/gamesvr-goldsource"
 
-RUN dpkg --add-architecture i386 &&`
-    apt-get update && apt-get install -y `
-        ca-certificates lib32gcc1 lib32tinfo5 libcurl4-gnutls-dev:i386 libstdc++6 libstdc++6:i386 &&`
-    apt-get clean &&`
-    rm -rf /var/lib/apt/lists/*;
+COPY --chown=GoldSource:root --from=goldsource-builder /output /app
 
-## Gold Source is so large we can't reliably use multi-stage builds in docker cloud
+COPY --chown=GoldSource:root ./ll-tests /app/ll-tests
 
-# Copy files in from builder
-COPY --from=goldsource-builder /output /app
+RUN chmod +x /app/ll-tests/*.sh;
 
-# Copy cached build files (if any)
-COPY ./build-cache /app
-
-#Pull in SteamCMD
-COPY --from=goldsource-builder /app /app/steamcmd
-
-# Install Gold Source
-#RUN echo $'\n\nDownloading Gold Source via SteamCMD' &&`
-#        /app/steamcmd/steamcmd.sh `
-#            +login anonymous `
-#            +force_install_dir /app `
-#            +app_update 90 validate `
-#            +quit;
-
-# Work around for https://github.com/ValveSoftware/steam-for-linux/issues/4950
-COPY ./HLDS-appmanifest-hack /manifests-hack
-
-RUN echo $'Counter-Strike 1.6' &&`
-		rm -rf /app/steamapps/* &&`
-		mv /manifests-hack/CounterStrike/*.acf /app/steamapps/*.acf &&`
-		/app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 +app_set_config "90 mod cstrike" +quit;
-	
-RUN echo $'Counter-Strike: Condition Zero' &&`
-		rm -rf /app/steamapps/* &&`
-		mv /manifests-hack/CounterStrikeConditionZero/*.acf /app/steamapps/*.acf &&`
-		/app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 +app_set_config "90 mod czero" +quit;
-
-RUN echo $'Day of Defeat' &&`
-		rm -rf /app/steamapps/* &&`
-		mv /manifests-hack/DayOfDefeat/*.acf /app/steamapps/*.acf &&`
-		/app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 +app_set_config "90 mod dod" +quit;
-
-RUN echo $'Deathmatch Classic' &&`
-		rm -rf /app/steamapps/* &&`
-		mv /manifests-hack/DeathmatchClassic/*.acf /app/steamapps/*.acf &&`
-		/app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 +app_set_config "90 mod dmc" +quit;
-
-RUN echo $'Half-Life: Opposing Force' &&`
-		rm -rf /app/steamapps/* &&`
-		mv /manifests-hack/OpposingForce/*.acf /app/steamapps/*.acf &&`
-		/app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 +app_set_config "90 mod gearbox" +quit;
-
-RUN echo $'Ricochet' &&`
-		rm -rf /app/steamapps/* &&`
-		mv /manifests-hack/Ricochet/*.acf /app/steamapps/*.acf &&`
-		/app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 +app_set_config "90 mod ricochet" +quit;
-
-RUN echo $'Team Fortress Classic' &&`
-		rm -rf /app/steamapps/* &&`
-		mv /manifests-hack/TeamFortressClassic/*.acf /app/steamapps/*.acf &&`
-		/app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 +app_set_config "90 mod tfc" +quit;
-
-RUN echo $'Half-Life Deathmatch' &&`
-		rm -rf /app/steamapps/* &&`
-		mv /manifests-hack/HalfLifeDeathmatch/*.acf /app/steamapps/*.acf &&`
-		/app/steamcmd/steamcmd.sh +login anonymous +force_install_dir /app +app_update 90 validate +quit;
-
-## Add in tests
-COPY ./tests /app/ll-tests
-
-RUN echo $'\n\nCreating user "GoldSource" (to group "root" until [github.com/moby/moby/pull/34263] makes it into CE stable)' &&`
-        useradd --home /app --gid root --system `
-            GoldSource &&`
-    echo 'Setting user directory permissions' &&`
-        chown GoldSource:root /app &&`
-        find /app -type d -exec chmod 775 {} + &&`
-        chmod +x /app/ll-tests/*.sh
-
-# Intentionally set after all build steps
 USER GoldSource
 
 WORKDIR /app
+
+CMD ["/bin/bash"]
 
 ONBUILD USER root

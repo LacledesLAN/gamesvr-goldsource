@@ -18,64 +18,104 @@ docker pull lacledeslan/gamesvr-goldsource;
 
 **Run self tests**
 ```
-TODO
+docker run -it --rm lacledeslan/gamesvr-goldsource ./ll-tests/gamesvr-goldsource.sh;
 ```
 
 ### Counter-Strike 1.6
 
 **Run simple interactive server**
 ```
-docker run -it --rm --net=host lacledeslan/gamesvr-goldsource ./hlds_run -console -secure +sv_lan 1 -game cstrike +de_dust2 +maxplayers 32;
+docker run -it --rm --net=host lacledeslan/gamesvr-goldsource ./hlds_run +sv_lan 1 -game cstrike +map de_dust2 +maxplayers 24;
+```
+
+**Run self-tests**
+```
+docker run -it --rm lacledeslan/gamesvr-goldsource ./ll-tests/gamesvr-goldsource.cstrike.sh;
 ```
 
 ### Counter-Strike Condition Zero
 
 **Run simple interactive server**
 ```
-docker run -it --rm --net=host lacledeslan/gamesvr-goldsource ./hlds_run -console +sv_lan 1 -game czero +map as_oilrig +maxplayers 32;
+docker run -it --rm --net=host lacledeslan/gamesvr-goldsource ./hlds_run +sv_lan 1 -game czero +map as_oilrig +maxplayers 24;
+```
+
+**Run self-tests**
+```
+docker run -it --rm lacledeslan/gamesvr-goldsource ./ll-tests/gamesvr-goldsource.czero.sh;
+```
+### Deathmatch Classic
+
+**Run simple interactive server**
+```
+docker run -it --rm --net=host lacledeslan/gamesvr-goldsource ./hlds_run +sv_lan 1 -game dmc +map dcdm5 +maxplayers 16;
+```
+
+**Run self-tests**
+```
+docker run -it --rm lacledeslan/gamesvr-goldsource ./ll-tests/gamesvr-goldsource.dmc.sh;
 ```
 
 ### Day of Defeat
 
 **Run simple interactive server**
 ```
-docker run -it --rm --net=host lacledeslan/gamesvr-goldsource ./hlds_run -console +sv_lan 1 -game dod +map dod_avalanche +maxplayers 32;
+docker run -it --rm --net=host lacledeslan/gamesvr-goldsource ./hlds_run 1 -game dod +map dod_avalanche +maxplayers 24;
 ```
 
-### Deathmatch Classic
-
-**Run simple interactive server**
+**Run self-tests**
 ```
-docker run -it --rm --net=host lacledeslan/gamesvr-goldsource ./hlds_run -console -secure +sv_lan 1 -game dmc +map dcdm5 +maxplayers 16;
+docker run -it --rm lacledeslan/gamesvr-goldsource ./ll-tests/gamesvr-goldsource.dod.sh;
 ```
 
 ### Half-Life Deatmatch
 
 **Run simple interactive server**
 ```
-docker run -it --rm --net=host lacledeslan/gamesvr-goldsource ./hlds_run -console -secure +sv_lan 1 -game valve +map crossfire +maxplayers 16;
+docker run -it --rm --net=host lacledeslan/gamesvr-goldsource ./hlds_run +sv_lan 1 -game valve +map crossfire +maxplayers 16;
+```
+
+**Run self-tests**
+```
+docker run -it --rm lacledeslan/gamesvr-goldsource ./ll-tests/gamesvr-goldsource.hldm.sh;
 ```
 
 ### Half-Life Opposing Force
 
 **Run simple interactive server**
 ```
-docker run -it --rm --net=host lacledeslan/gamesvr-goldsource ./hlds_run -console -secure +sv_lan 1 -game gearbox +map op4_bootcamp +maxplayers 16;
+docker run -it --rm --net=host lacledeslan/gamesvr-goldsource ./hlds_run +sv_lan 1 -game gearbox +map op4_bootcamp +maxplayers 16;
+```
+
+**Run self-tests**
+```
+docker run -it --rm lacledeslan/gamesvr-goldsource ./ll-tests/gamesvr-goldsource.gearbox.sh;
 ```
 
 ### Ricochet
 
 **Run simple interactive server**
 ```
-docker run -it --rm --net=host lacledeslan/gamesvr-goldsource ./hlds_run -console -secure +sv_lan 1 -game ricochet +map rc_arena +maxplayers 16;
+docker run -it --rm --net=host lacledeslan/gamesvr-goldsource ./hlds_run +sv_lan 1 -game ricochet +map rc_arena +maxplayers 16;
+```
+
+**Run self-tests**
+```
+docker run -it --rm lacledeslan/gamesvr-goldsource ./ll-tests/gamesvr-goldsource.ricochet.sh;
 ```
 
 ### Team Fortress Classic
 
 **Run simple interactive server**
 ```
-docker run -it --rm --net=host lacledeslan/gamesvr-goldsource ./hlds_run -console -secure +sv_lan 1 -game tfc +map dustbowl +maxplayers 16;
+docker run -it --rm --net=host lacledeslan/gamesvr-goldsource ./hlds_run +sv_lan 1 -game tfc +map dustbowl +maxplayers 16;
 ```
+
+**Run self-tests**
+```
+docker run -it --rm lacledeslan/gamesvr-goldsource ./ll-tests/gamesvr-goldsource.tfc.sh;
+```
+
 
 ## Getting Started with Game Servers in Docker
 

@@ -14,7 +14,7 @@ RUN echo $'Downloading LL custom cstrike maps from content server' &&`
 	echo "Decompressing map files" &&`
 		bzip2 --decompress /tmp/maps/*.bz2 &&`
 	echo "Moving uncompressed map files to destination" &&`
-		mkdir --parents /output/cstrike/maps/ &&`
+		mkdir --parents /output/cstrike/maps/ &&` 
 		mv -n /tmp/maps/*.bsp /output/cstrike/maps/;
 
 # Half-Life Deathmatch Maps
@@ -42,66 +42,42 @@ RUN echo "Downloading LL custom hldm models from content server" &&`
 
 RUN echo $'\n\n\n\n\nCounter-Strike 1.6' &&`
 	for i in 10 70 90; do wget -P /output -q https://raw.githubusercontent.com/LacledesLAN/HLDS-appmanifest/master/CounterStrike/appmanifest_$i.acf -O appmanifest_$i.acf; done &&`
-	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod cstrike validate +quit &&`
-	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod cstrike validate +quit &&`
-	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod cstrike validate +quit &&`
-	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod cstrike validate +quit &&`
+	for i in 0 1 2 3; do /app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod cstrike validate +quit; done &&`
 	for i in 10 70 90; do rm -f /output/appmanifest_$i.acf; done;
 
 RUN echo $'\n\n\n\n\nCounter-Strike: Condition Zero\n===================================\n' &&`
 	for i in 10 70 80 90; do wget -P /output -q https://raw.githubusercontent.com/LacledesLAN/HLDS-appmanifest/master/CounterStrikeConditionZero/appmanifest_$i.acf -O appmanifest_$i.acf; done &&`
-	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod czero validate +quit &&`
-	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod czero validate +quit &&`
-	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod czero validate +quit &&`
-	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod czero validate +quit &&`
+	for i in 0 1 2 3; do /app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod czero validate +quit; done &&`
 	for i in 10 70 80 90; do rm -f /output/appmanifest_$i.acf; done;
 
 RUN echo $'\n\n\n\n\nDay of Defeat\n===================================\n' &&`
 	for i in 10 30 70 90; do wget -P /output -q https://raw.githubusercontent.com/LacledesLAN/HLDS-appmanifest/master/DayOfDefeat/appmanifest_$i.acf -O appmanifest_$i.acf; done &&`
-	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod dod validate +quit &&`
-	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod dod validate +quit &&`
-	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod dod validate +quit &&`
-	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod dod validate +quit &&`
+	for i in 0 1 2 3; do /app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod dod validate +quit; done &&`
 	for i in 10 30 70 90; do rm -f /output/appmanifest_$i.acf; done;
 
 RUN echo $'\n\n\n\n\nDeathmatch Classic\n===================================\n' &&`
 	for i in 10 40 70 90; do wget -P /output -q https://raw.githubusercontent.com/LacledesLAN/HLDS-appmanifest/master/DeathmatchClassic/appmanifest_$i.acf -O appmanifest_$i.acf; done &&`
-	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod dmc validate +quit &&`
-	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod dmc validate +quit &&`
-	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod dmc validate +quit &&`
-	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod dmc validate +quit &&`
+	for i in 0 1 2 3; do /app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod dmc validate +quit; done &&`
 	for i in 10 40 70 90; do rm -f /output/appmanifest_$i.acf; done;
 
 RUN echo $'\n\n\n\n\nHalf-Life: Deathmatch\n===================================\n' &&`
 	for i in 10 70 90; do wget -P /output -q https://raw.githubusercontent.com/LacledesLAN/HLDS-appmanifest/master/HalfLifeDeathmatch/appmanifest_$i.acf -O appmanifest_$i.acf; done &&`
-	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 validate +quit &&`
-	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 validate +quit &&`
-	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 validate +quit &&`
-	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 validate +quit &&`
+	for i in 0 1 2 3; do /app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 validate +quit; done &&`
 	for i in 10 70 90; do rm -f /output/appmanifest_$i.acf; done;
 
 RUN echo $'\n\n\n\n\nOpposing Force\n===================================\n' &&`
 	for i in 10 50 70 90; do wget -P /output -q https://raw.githubusercontent.com/LacledesLAN/HLDS-appmanifest/master/OpposingForce/appmanifest_$i.acf -O appmanifest_$i.acf; done &&`
-	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod gearbox validate +quit &&`
-	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod gearbox validate +quit &&`
-	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod gearbox validate +quit &&`
-	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod gearbox validate +quit &&`
+	for i in 0 1 2 3; do /app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod gearbox validate +quit; done &&`
 	for i in 10 50 70 90; do rm -f /output/appmanifest_$i.acf; done;
 
 RUN echo $'\n\n\n\n\nRicochet\n===================================\n' &&`
 	for i in 10 60 70 90; do wget -P /output -q https://raw.githubusercontent.com/LacledesLAN/HLDS-appmanifest/master/Ricochet/appmanifest_$i.acf -O appmanifest_$i.acf; done &&`
-	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod ricochet validate +quit &&`
-	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod ricochet validate +quit &&`
-	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod ricochet validate +quit &&`
-	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod ricochet validate +quit &&`
+	for i in 0 1 2 3; do /app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod ricochet validate +quit; done &&`
 	for i in 10 60 70 90; do rm -f /output/appmanifest_$i.acf; done;
 
 RUN echo $'\n\n\n\n\nTeam Fortress Classic\n===================================\n' &&`
 	for i in 10 20 70 90; do wget -P /output -q https://raw.githubusercontent.com/LacledesLAN/HLDS-appmanifest/master/TeamFortressClassic/appmanifest_$i.acf -O appmanifest_$i.acf; done &&`
-	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod tfc validate +quit &&`
-	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod tfc validate +quit &&`
-	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod tfc validate +quit &&`
-	/app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod tfc validate +quit &&`
+	for i in 0 1 2 3; do /app/steamcmd.sh +login anonymous +force_install_dir /output +app_update 90 +app_set_config 90 mod tfc validate +quit; done &&`
 	for i in 10 20 70 90; do rm -f /output/appmanifest_$i.acf; done;
 
 RUN echo 90 > /output/steam_appid.txt;

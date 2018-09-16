@@ -14,7 +14,7 @@ RUN echo $'Downloading LL custom cstrike maps from content server' &&`
 	echo "Decompressing map files" &&`
 		bzip2 --decompress /tmp/maps/*.bz2 &&`
 	echo "Moving uncompressed map files to destination" &&`
-		mkdir --parents /output/cstrike/maps/ &&` 
+		mkdir --parents /output/cstrike/maps/ &&`
 		mv -n /tmp/maps/*.bsp /output/cstrike/maps/;
 
 # Half-Life Deathmatch Maps

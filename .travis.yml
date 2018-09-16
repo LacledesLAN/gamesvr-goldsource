@@ -1,0 +1,35 @@
+sudo: required
+os: linux
+language: minimal
+addons:
+  apt:
+    packages:
+    - docker-ce
+git:
+  depth: 4
+services:
+  - docker
+
+before_install:
+  - docker pull lacledeslan/steamcmd:linux
+  - docker pull debian:stretch-slim
+
+script:
+  - docker version
+  - docker build --no-cache --tag lltest/gamesvr-goldsource --tag lacledeslan/gamesvr-goldsource --build-arg BUILDNODE=TravisCI --build-arg SOURCE_COMMIT="$TRAVIS_COMMIT" ./linux
+  - docker run -it --rm lltest/gamesvr-goldsource ./ll-tests/gamesvr-goldsource.cstrike.sh
+  - docker run -it --rm lltest/gamesvr-goldsource ./ll-tests/gamesvr-goldsource.czero.sh
+  - docker run -it --rm lltest/gamesvr-goldsource ./ll-tests/gamesvr-goldsource.dmc.sh
+  - docker run -it --rm lltest/gamesvr-goldsource ./ll-tests/gamesvr-goldsource.dod.sh
+  - docker run -it --rm lltest/gamesvr-goldsource ./ll-tests/gamesvr-goldsource.gearbox.sh
+  - docker run -it --rm lltest/gamesvr-goldsource ./ll-tests/gamesvr-goldsource.hldm.sh
+  - docker run -it --rm lltest/gamesvr-goldsource ./ll-tests/gamesvr-goldsource.ricochet.sh
+  - docker run -it --rm lltest/gamesvr-goldsource ./ll-tests/gamesvr-goldsource.tfc.sh
+
+before_deploy:
+  - echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USER" --password-stdin;
+deploy:
+  provider: script
+  script: docker push lacledeslan/gamesvr-goldsource
+  on:
+    branch: master

@@ -112,7 +112,9 @@ COPY --chown=GoldSource:root --from=goldsource-builder /output /app
 
 COPY --chown=GoldSource:root ./ll-tests /app/ll-tests
 
-RUN chmod +x /app/ll-tests/*.sh;
+RUN chmod +x /app/ll-tests/*.sh &&`
+    mkdir /app/.steam/sdk32 --parents &&`
+    ln -s /app/steamclient.so /app/.steam/sdk32/steamclient.so;
 
 USER GoldSource
 

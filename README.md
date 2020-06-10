@@ -13,7 +13,8 @@ This repository is maintained by [Laclede's LAN](https://lacledeslan.com). Its c
 [![](https://images.microbadger.com/badges/image/lacledeslan/gamesvr-goldsource.svg)](https://microbadger.com/images/lacledeslan/gamesvr-goldsource "Get your own image badge on microbadger.com")
 
 ### Download
-```
+
+```shell
 docker pull lacledeslan/gamesvr-goldsource;
 ```
 
@@ -21,21 +22,40 @@ docker pull lacledeslan/gamesvr-goldsource;
 
 The image includes a test script that can be used to verify its contents. No changes or pull-requests will be accepted to this repository if any tests fail.
 
-```
+```shell
 docker run -it --rm lacledeslan/gamesvr-goldsource ./ll-tests/gamesvr-goldsource.sh;
 ```
+
+### Troubleshooting
+
+#### STEAM validation rejected
+
+To use this image as an online capacity (e.g. `sv_lan=0`) the value of the text file */app/steam_appid.txt* must be set with the appropriate id; otherwise Internet connections will be rejected.
+
+| Game                          | Value | Example Snippet                   |
+| ----------------------------- | ----- | --------------------------------- |
+| Counter-Strike 1.6            | 10    | `echo 10 > /app/steam_appid.txt;` |
+| Counter-Strike Condition Zero | 80    | `echo 80 > /app/steam_appid.txt;` |
+| Deathmatch Classic            | 40    | `echo 40 > /app/steam_appid.txt;` |
+| Day of Defeat                 | 30    | `echo 30 > /app/steam_appid.txt;` |
+| Half-Life Deathmatch          | 90    | `echo 90 > /app/steam_appid.txt;` |
+| Opposing Force                | 50    | `echo 50 > /app/steam_appid.txt;` |
+| Ricochet                      | 60    | `echo 60 > /app/steam_appid.txt;` |
+| Team Fortress Classic         | 20    | `echo 20 > /app/steam_appid.txt;` |
+
+> See also [Steam Application IDs](https://developer.valvesoftware.com/wiki/Steam_Application_IDs)
 
 ### Counter-Strike 1.6
 
 #### Run Simple, Interactive Server
 
-```
+```shell
 docker run -it --rm --net=host lacledeslan/gamesvr-goldsource ./hlds_run +sv_lan 1 -game cstrike +map de_dust2 +maxplayers 24;
 ```
 
 #### Self-Test
 
-```
+```shell
 docker run -it --rm lacledeslan/gamesvr-goldsource ./ll-tests/gamesvr-goldsource.cstrike.sh;
 ```
 
@@ -43,13 +63,13 @@ docker run -it --rm lacledeslan/gamesvr-goldsource ./ll-tests/gamesvr-goldsource
 
 #### Run simple interactive server
 
-```
+```shell
 docker run -it --rm --net=host lacledeslan/gamesvr-goldsource ./hlds_run +sv_lan 1 -game czero +map as_oilrig +maxplayers 24;
 ```
 
 #### Self-Test
 
-```
+```shell
 docker run -it --rm lacledeslan/gamesvr-goldsource ./ll-tests/gamesvr-goldsource.czero.sh;
 ```
 
@@ -57,37 +77,41 @@ docker run -it --rm lacledeslan/gamesvr-goldsource ./ll-tests/gamesvr-goldsource
 
 #### Run simple interactive server
 
-```
+```shell
 docker run -it --rm --net=host lacledeslan/gamesvr-goldsource ./hlds_run +sv_lan 1 -game dmc +map dcdm5 +maxplayers 16;
 ```
 
 #### Self-Test
 
-```
+```shell
 docker run -it --rm lacledeslan/gamesvr-goldsource ./ll-tests/gamesvr-goldsource.dmc.sh;
 ```
 
 ### Day of Defeat
 
-**Run simple interactive server**
-```
+#### Run simple interactive server
+
+```shell
 docker run -it --rm --net=host lacledeslan/gamesvr-goldsource ./hlds_run 1 -game dod +map dod_avalanche +maxplayers 24;
 ```
 
 #### Self-Test
-```
+
+```shell
 docker run -it --rm lacledeslan/gamesvr-goldsource ./ll-tests/gamesvr-goldsource.dod.sh;
 ```
 
-### Half-Life Deatmatch
+### Half-Life Deathmatch
 
-**Run simple interactive server**
-```
+#### Run simple interactive server
+
+```shell
 docker run -it --rm --net=host lacledeslan/gamesvr-goldsource ./hlds_run +sv_lan 1 -game valve +map crossfire +maxplayers 16;
 ```
 
 #### Self-Test
-```
+
+```shell
 docker run -it --rm lacledeslan/gamesvr-goldsource ./ll-tests/gamesvr-goldsource.hldm.sh;
 ```
 
@@ -95,40 +119,42 @@ docker run -it --rm lacledeslan/gamesvr-goldsource ./ll-tests/gamesvr-goldsource
 
 #### Run simple interactive server
 
-```
+```shell
 docker run -it --rm --net=host lacledeslan/gamesvr-goldsource ./hlds_run +sv_lan 1 -game gearbox +map op4_bootcamp +maxplayers 16;
 ```
 
 #### Self-Test
 
-```
+```shell
 docker run -it --rm lacledeslan/gamesvr-goldsource ./ll-tests/gamesvr-goldsource.gearbox.sh;
 ```
 
 ### Ricochet
 
-**Run simple interactive server**
-```
+#### Run simple interactive server
+
+```shell
 docker run -it --rm --net=host lacledeslan/gamesvr-goldsource ./hlds_run +sv_lan 1 -game ricochet +map rc_arena +maxplayers 16;
 ```
 
 #### Self-Test
 
-```
+```shell
 docker run -it --rm lacledeslan/gamesvr-goldsource ./ll-tests/gamesvr-goldsource.ricochet.sh;
 ```
 
 ### Team Fortress Classic
 
-**Run simple interactive server**
+#### Run simple interactive server
 
-```
+
+```shell
 docker run -it --rm --net=host lacledeslan/gamesvr-goldsource ./hlds_run +sv_lan 1 -game tfc +map dustbowl +maxplayers 16;
 ```
 
 #### Self-Test
 
-```
+```shell
 docker run -it --rm lacledeslan/gamesvr-goldsource ./ll-tests/gamesvr-goldsource.tfc.sh;
 ```
 

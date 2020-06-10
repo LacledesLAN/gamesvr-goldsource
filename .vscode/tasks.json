@@ -4,11 +4,19 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build",
+            "label": "Build & Run Self Tests",
+            "type": "shell",
+            "command": "docker run -it --rm lltest/gamesvr-goldsource ./ll-tests/gamesvr-goldsource.sh;",
+            "group": "build",
+            "problemMatcher": [],
+            "promptOnClose": true,
+            "dependsOn": "Build Docker Image"
+        },
+        {
+            "label": "Build Docker Image",
             "type": "shell",
             "command": "docker pull lacledeslan/steamcmd:linux; docker pull debian:stretch-slim; docker build ./linux -t lltest/gamesvr-goldsource --no-cache --build-arg BUILDNODE=$env:computername;",
             "group": "build",
-            "identifier": "build-image",
             "problemMatcher": [],
             "promptOnClose": true
         },

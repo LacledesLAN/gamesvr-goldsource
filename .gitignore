@@ -1,5 +1,5 @@
-./linux/build-cache/
-!./linux/build-cache/.gitkeep
+build-cache/**
+!build-cache/.gitkeep
 
 
 ### VisualStudioCode ###

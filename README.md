@@ -9,8 +9,6 @@ This repository is maintained by [Laclede's LAN](https://lacledeslan.com). Its c
 ## Linux
 
 [![Build Status](https://travis-ci.org/LacledesLAN/gamesvr-goldsource.svg?branch=master)](https://travis-ci.org/LacledesLAN/gamesvr-goldsource)
-[![](https://images.microbadger.com/badges/version/lacledeslan/gamesvr-goldsource.svg)](https://microbadger.com/images/lacledeslan/gamesvr-goldsource "Get your own version badge on microbadger.com")
-[![](https://images.microbadger.com/badges/image/lacledeslan/gamesvr-goldsource.svg)](https://microbadger.com/images/lacledeslan/gamesvr-goldsource "Get your own image badge on microbadger.com")
 
 ### Download
 
@@ -146,7 +144,6 @@ docker run -it --rm lacledeslan/gamesvr-goldsource ./ll-tests/gamesvr-goldsource
 ### Team Fortress Classic
 
 #### Run simple interactive server
-
 
 ```shell
 docker run -it --rm --net=host lacledeslan/gamesvr-goldsource ./hlds_run +sv_lan 1 -game tfc +map dustbowl +maxplayers 16;

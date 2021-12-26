@@ -150,6 +150,7 @@ should_lack 'Running the dedicated server as root' 'Server is not running under 
 should_have 'Setting breakpad minidump AppID = 50' 'Steam App ID 50 is running';
 should_have 'Stdio (valve)' 'dmc mod loaded';
 should_lack 'map change failed:' 'Map was able to load';
+should_lack 'scandir failed' '/app/gearbox/SAVEDIR folder not missing';
 
 # Verify server responds to commands
 should_echo "say STARTING COMMAND TESTS" '<Half-Life> STARTING COMMAND TESTS';

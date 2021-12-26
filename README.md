@@ -4,11 +4,11 @@ Gold Source (abbreviated "GoldSrc") is a game engine developed by Valve Corporat
 
 ![GoldSrc Collage](https://raw.githubusercontent.com/LacledesLAN/gamesvr-goldsource/master/.misc/artwork1.jpg "GoldSrc Collage")
 
-This repository is maintained by [Laclede's LAN](https://lacledeslan.com). Its contents are intended to be bare-bones and used as a stock server. For examples of building a customized server from this Docker image browse its related child-project [gamesvr-goldsource-cstrike](https://github.com/LacledesLAN/gamesvr-goldsource-cstrike), [gamesvr-goldsource-dmc](https://github.com/LacledesLAN/gamesvr-goldsource-dmc), [gamesvr-goldsource-hldm](https://github.com/LacledesLAN/gamesvr-goldsource-hldm), and [gamesvr-goldsrc-tfc](https://github.com/LacledesLAN/gamesvr-goldsource-tfc). If any documentation is unclear or it has any issues please see [CONTRIBUTING.md](./CONTRIBUTING.md).
+This repository is maintained by [Laclede's LAN](https://lacledeslan.com). Its contents are intended to be bare-bones and used as a stock server. For examples of building a customized server from this Docker image browse its related child-project [gamesvr-goldsource-cstrike](https://github.com/LacledesLAN/gamesvr-goldsource-cstrike), [gamesvr-goldsource-dmc](https://github.com/LacledesLAN/gamesvr-goldsource-dmc), [gamesvr-goldsource-hldm](https://github.com/LacledesLAN/gamesvr-goldsource-hldm), and [gamesvr-goldsource-tfc](https://github.com/LacledesLAN/gamesvr-goldsource-tfc). If any documentation is unclear or it has any issues please see [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## Linux
 
-[![Build Status](https://travis-ci.org/LacledesLAN/gamesvr-goldsource.svg?branch=master)](https://travis-ci.org/LacledesLAN/gamesvr-goldsource)
+[![linux/amd64](https://github.com/LacledesLAN/gamesvr-goldsource/actions/workflows/build-linux-image.yml/badge.svg?branch=master)](https://github.com/LacledesLAN/gamesvr-goldsource/actions/workflows/build-linux-image.yml)
 
 ### Download
 

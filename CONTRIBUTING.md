@@ -1,10 +1,10 @@
-## Contributing
+# Contributing
 
-First off, thank you for considering contributing to `gamesvr-srcds-goldsource`. It's people like you that make Laclede's LAN such a great community.
+First off, thank you for considering contributing to `gamesvr-goldsource`. It's people like you that make Laclede's LAN such a great community.
 
-### Did you find a bug or have questions?
+## Did you find a bug or have questions?
 
-Let us know by using [GitHub issues](https://github.com/LacledesLAN/gamesvr-srcds-goldsource/issues) on this repository.
+Let us know by using [GitHub issues](https://github.com/LacledesLAN/gamesvr-goldsource/issues) on this repository.
 
 ### Have a fix or feature?
 

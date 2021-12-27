@@ -6,16 +6,8 @@ ARG contentServer=content.lacledeslan.net
 
 USER SteamCMD
 
-# Counter-Strike 1.6 Maps
-RUN echo $'Downloading LL custom cstrike maps from content server' &&`
-		mkdir --parents /tmp/maps/ &&`
-		cd /tmp/maps/ &&`
-		wget -rkp -l 1 -nH --no-verbose --cut-dirs=3 -R "*.htm*" -e robots=off "http://"$contentServer"/fastDownloads/goldsrc-cstrike/maps/" &&`
-	echo "Decompressing map files" &&`
-		bzip2 --decompress /tmp/maps/*.bz2 &&`
-	echo "Moving uncompressed map files to destination" &&`
-		mkdir --parents /output/cstrike/maps/ &&`
-		mv -n /tmp/maps/*.bsp /output/cstrike/maps/;
+# Counter-Strike 1.6 Assets (not compressed)
+RUN wget -r -nH --no-verbose --cut-dirs=2 --no-parent --reject="index.htm*, *.md" -e robots=off --directory-prefix="/output/cstrike/" "http://content.lacledeslan.net/fastDownloads/goldsrc-cstrike/"
 
 # Half-Life Deathmatch Maps
 RUN echo $'Downloading LL custom hldm maps from content server' &&`

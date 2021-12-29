@@ -55,3 +55,25 @@ jobs:
       - name: Push to GitHub Packages
         if: ${{ github.event_name != 'pull_request' }}
         run: docker push ghcr.io/lacledeslan/gamesvr-goldsource:latest
+      - name: Trigger downstream build of lacledeslan/gamesvr-goldsource-cstrike
+        if: ${{ github.event_name != 'pull_request' }}
+        run: |-
+          curl -XPOST -u "${{ secrets.GH_PAT_USERNAME }}:${{ secrets.GH_PAT_TOKEN }}" \
+          -H "Accept: application/vnd.github.v3+json" -H "Content-Type: application/json" \
+          --data '{"event_type": "${{ github.repository }} was updated", "client_payload": {"Run Number":"${{ github.run_number }}", "Run ID":"${{ github.run_id }}", "Source Commit":"${{ github.sha }}"}}' \
+          https://api.github.com/repos/LacledesLAN/gamesvr-goldsource-cstrike/dispatches
+      - name: Trigger downstream build of lacledeslan/gamesvr-goldsource-dmc
+        if: ${{ github.event_name != 'pull_request' }}
+        run: |-
+          curl -XPOST -u "${{ secrets.GH_PAT_USERNAME }}:${{ secrets.GH_PAT_TOKEN }}" \
+          -H "Accept: application/vnd.github.v3+json" -H "Content-Type: application/json" \
+          --data '{"event_type": "${{ github.repository }} was updated", "client_payload": {"Run Number":"${{ github.run_number }}", "Run ID":"${{ github.run_id }}", "Source Commit":"${{ github.sha }}"}}' \
+          https://api.github.com/repos/LacledesLAN/gamesvr-goldsource-dmc/dispatches
+    # TODO: gamesvr-goldsource-hldm
+      - name: Trigger downstream build of lacledeslan/gamesvr-goldsource-tfc
+        if: ${{ github.event_name != 'pull_request' }}
+        run: |-
+          curl -XPOST -u "${{ secrets.GH_PAT_USERNAME }}:${{ secrets.GH_PAT_TOKEN }}" \
+          -H "Accept: application/vnd.github.v3+json" -H "Content-Type: application/json" \
+          --data '{"event_type": "${{ github.repository }} was updated", "client_payload": {"Run Number":"${{ github.run_number }}", "Run ID":"${{ github.run_id }}", "Source Commit":"${{ github.sha }}"}}' \
+          https://api.github.com/repos/LacledesLAN/gamesvr-goldsource-tfc/dispatches

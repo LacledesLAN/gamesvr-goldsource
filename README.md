@@ -8,8 +8,6 @@ This repository is maintained by [Laclede's LAN](https://lacledeslan.com). Its c
 
 ## Linux
 
-[![linux/amd64](https://github.com/LacledesLAN/gamesvr-goldsource/actions/workflows/build-linux-image.yml/badge.svg?branch=master)](https://github.com/LacledesLAN/gamesvr-goldsource/actions/workflows/build-linux-image.yml)
-
 ### Download
 
 ```shell

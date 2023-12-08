@@ -13,26 +13,6 @@ RUN if [ -z "$STEAM_USERNAME" ]; then echo "Missing steam username"; exit 111; e
 # Counter-Strike 1.6 Assets (not compressed)
 RUN wget -r -nH --no-verbose --cut-dirs=2 --no-parent --reject="index.htm*, *.md" -e robots=off --directory-prefix="/output/cstrike/" "http://content.lacledeslan.net/fastDownloads/goldsrc-cstrike/"
 
-# Half-Life Deathmatch Maps
-RUN echo $'Downloading LL custom hldm maps from content server' &&`
-		mkdir --parents /tmp/maps/ &&`
-		cd /tmp/maps/ &&`
-		wget -rkp -l 1 -nH --no-verbose --cut-dirs=3 -R "*.htm*" -e robots=off "http://"$contentServer"/fastDownloads/goldsrc-hldm/maps/" &&`
-	echo "Decompressing map files" &&`
-		bzip2 --decompress /tmp/maps/*.bz2 &&`
-	echo "Moving uncompressed map files to destination" &&`
-		mkdir --parents /output/valve/maps/ &&`
-		mv -n /tmp/maps/*.bsp /output/valve/maps/;
-
-# Half-Life Deathmatch Models
-RUN echo "Downloading LL custom hldm models from content server" &&`
-		mkdir --parents /tmp/models/ &&`
-		cd /tmp/models/ &&`
-		wget -rkp -l 2 -nH --no-verbose --cut-dirs=3 -R "*.htm*" -R "*.ico" -R "*.md" -R "*.png" -e robots=off "http://"$contentServer"/fastDownloads/goldsrc-hldm/models/" &&`
-	echo "Moving model files to destination" &&`
-		mkdir --parents /output/valve/models/ &&`
-		mv -n /tmp/models/* /output/valve/models/;
-
 # Make sure SteamCMD is up to date (cuts down on log output noise)
 RUN /app/steamcmd.sh +force_install_dir /output +quit;
 

@@ -99,7 +99,8 @@ COPY --chown=GoldSource:root ./dist/linux/ll-tests /app/ll-tests
 RUN chmod +x /app/ll-tests/*.sh &&`
     mkdir --parents /app/.steam/sdk32 --parents &&`
     ln -s /app/steamclient.so /app/.steam/sdk32/steamclient.so &&`
-    mkdir --parents /app/gearbox/SAVE;
+    mkdir --parents /app/gearbox/SAVE &&`
+    chmod -R u+rw /app;
 
 RUN echo 10 > /app/steam_appid.txt
 

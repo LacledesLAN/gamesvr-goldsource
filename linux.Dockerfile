@@ -67,7 +67,7 @@ RUN echo $'<Team Fortress Classic>\n' &&`
 RUN echo 90 > /output/steam_appid.txt;
 
 #####=======================================================================
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 
 ARG BUILDNODE="unspecified"
 ARG SOURCE_COMMIT

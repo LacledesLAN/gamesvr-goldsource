@@ -1,6 +1,6 @@
 # escape=`
 
-FROM lacledeslan/steamcmd:linux as goldsource-builder
+FROM lacledeslan/steamcmd:linux AS goldsource-builder
 
 ARG contentServer=content.lacledeslan.net
 ARG STEAM_USERNAME

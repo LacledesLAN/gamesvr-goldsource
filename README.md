@@ -1,10 +1,19 @@
 # Gold Source Dedicated Servers in Docker
 
-Gold Source (abbreviated "GoldSrc") is a game engine developed by Valve Corporation, first showcased in the 1998 first-person shooter game Half-Life. This GoldSrc Docker image includes dedicated server binaries and content for Counter-Strike 1.6, Counter-Strike: Condition Zero, Day of Defeat, Deathmatch Classic, Half-Life Deathmatch, Half-Life: Opposing Force, Ricochet, and Team Fortress Classic.
+Gold Source (abbreviated "GoldSrc") is a game engine developed by Valve Corporation, first showcased in the 1998 first-
+person shooter game Half-Life. This GoldSrc Docker image includes dedicated server binaries and content for Counter-
+Strike 1.6, Counter-Strike: Condition Zero, Day of Defeat, Deathmatch Classic, Half-Life Deathmatch, Half-Life:
+Opposing Force, Ricochet, and Team Fortress Classic.
 
-![GoldSrc Collage](https://raw.githubusercontent.com/LacledesLAN/gamesvr-goldsource/master/.misc/artwork1.jpg "GoldSrc Collage")
+![GoldSrc](https://raw.githubusercontent.com/LacledesLAN/gamesvr-goldsource/master/Documentation/media/heading.jpg "GoldSrc")
 
-This repository is maintained by [Laclede's LAN](https://lacledeslan.com). Its contents are intended to be bare-bones and used as a stock server. For examples of building a customized server from this Docker image browse its related child-project [gamesvr-goldsource-cstrike](https://github.com/LacledesLAN/gamesvr-goldsource-cstrike), [gamesvr-goldsource-dmc](https://github.com/LacledesLAN/gamesvr-goldsource-dmc), [gamesvr-goldsource-hldm](https://github.com/LacledesLAN/gamesvr-goldsource-hldm), and [gamesvr-goldsource-tfc](https://github.com/LacledesLAN/gamesvr-goldsource-tfc). If any documentation is unclear or it has any issues please see [CONTRIBUTING.md](./CONTRIBUTING.md).
+This repository is maintained by [Laclede's LAN](https://lacledeslan.com). Its contents are intended to be bare-bones
+and used as a stock server. For examples of building a customized server from this Docker image browse its related
+child-project [gamesvr-goldsource-cstrike](https://github.com/LacledesLAN/gamesvr-goldsource-cstrike),
+[gamesvr-goldsource-dmc](https://github.com/LacledesLAN/gamesvr-goldsource-dmc),
+[gamesvr-goldsource-hldm](https://github.com/LacledesLAN/gamesvr-goldsource-hldm), and
+[gamesvr-goldsource-tfc](https://github.com/LacledesLAN/gamesvr-goldsource-tfc). If any documentation is unclear or it
+has any issues please see [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## Linux
 
@@ -88,7 +97,7 @@ docker run -it --rm lacledeslan/gamesvr-goldsource ./ll-tests/gamesvr-goldsource
 #### Run simple interactive server
 
 ```shell
-docker run -it --rm --net=host lacledeslan/gamesvr-goldsource ./hlds_run 1 -game dod +map dod_avalanche +maxplayers 24;
+docker run -it --rm --net=host lacledeslan/gamesvr-goldsource ./hlds_run 1 +sv_lan 1 -game dod +map dod_avalanche +maxplayers 24;
 ```
 
 #### Self-Test
@@ -155,4 +164,10 @@ docker run -it --rm lacledeslan/gamesvr-goldsource ./ll-tests/gamesvr-goldsource
 
 ## Getting Started with Game Servers in Docker
 
-[Docker](https://docs.docker.com/) is an open-source project that bundles applications into lightweight, portable, self-sufficient containers. For a crash course on running Dockerized game servers check out [Using Docker for Game Servers](https://github.com/LacledesLAN/README.1ST/blob/master/GameServers/DockerAndGameServers.md). For tips, tricks, and recommended tools for working with Laclede's LAN Dockerized game server repos see the guide for [Working with our Game Server Repos](https://github.com/LacledesLAN/README.1ST/blob/master/GameServers/WorkingWithOurRepos.md). You can also browse all of our other Dockerized game servers: [Laclede's LAN Game Servers Directory](https://github.com/LacledesLAN/README.1ST/tree/master/GameServers).
+[Docker](https://docs.docker.com/) is an open-source project that bundles applications into lightweight, portable, self-
+sufficient containers. For a crash course on running Dockerized game servers check out [Using Docker for Game
+Servers](https://github.com/LacledesLAN/README.1ST/blob/master/GameServers/DockerAndGameServers.md). For tips, tricks,
+and recommended tools for working with Laclede's LAN Dockerized game server repos see the guide for [Working with our
+Game Server Repos](https://github.com/LacledesLAN/README.1ST/blob/master/GameServers/WorkingWithOurRepos.md). You can
+also browse all of our other Dockerized game servers: [Laclede's LAN Game Servers
+Directory](https://github.com/LacledesLAN/README.1ST/tree/master/GameServers).

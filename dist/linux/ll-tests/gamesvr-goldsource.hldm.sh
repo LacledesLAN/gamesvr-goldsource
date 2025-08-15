@@ -150,6 +150,7 @@ should_lack 'Running the dedicated server as root' 'Server is not running under 
 should_have 'Setting breakpad minidump AppID = 70' 'Steam App ID 70 is running';
 should_have 'Stdio (valve)' 'hldm mod loaded';
 should_lack 'map change failed:' 'Map was able to load';
+should_lack 'Your server needs to be restarted in order to receive the latest update.' 'server not reporting out of date';
 
 # Verify server responds to commands
 should_echo "say STARTING COMMAND TESTS" '<Half-Life> STARTING COMMAND TESTS';

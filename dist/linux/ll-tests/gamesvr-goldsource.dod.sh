@@ -150,6 +150,7 @@ should_lack 'Running the dedicated server as root' 'Server is not running under 
 should_have 'Setting breakpad minidump AppID = 30' 'Steam App ID 30 is running';
 should_have 'Stdio (dod)' 'dod mod loaded';
 should_lack 'map change failed:' 'Map was able to load';
+should_lack 'Your server needs to be restarted in order to receive the latest update.' 'server not reporting out of date';
 
 # Verify server responds to commands
 should_echo "say STARTING COMMAND TESTS" '<DoD v1.2> STARTING COMMAND TESTS';

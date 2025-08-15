@@ -1,18 +1,44 @@
 {
+    "files.encoding": "utf8",
+    "terminal.integrated.scrollback": 3500,
+    "[markdown]": {
+        "cSpell.fixSpellingWithRenameProvider": true,
+        "cSpell.advanced.feature.useReferenceProviderWithRename": true,
+        "cSpell.advanced.feature.useReferenceProviderRemove": "/^#+\\s/",
+        "editor.rulers": [120],
+        "editor.unicodeHighlight.ambiguousCharacters": true,
+        "editor.unicodeHighlight.invisibleCharacters": true,
+        "editor.wordWrap": "on"
+    },
     "cSpell.words": [
         "appid",
+        "appmanifest",
+        "bootcamp",
+        "breakpad",
+        "BUILDNODE",
         "cstrike",
         "czero",
         "deathmatch",
         "DOCKERHUB",
         "Dockerized",
+        "dpkg",
+        "dustbowl",
         "gamesvr",
+        "gnutls",
         "goldsource",
         "hldm",
+        "hlds",
         "Laclede's",
-        "Laclede’s",
         "lacledeslan",
+        "maxplayers",
+        "minidump",
+        "norestart",
+        "oilrig",
         "steam",
-        "steam appid"
+        "steam appid",
+        "steamapps",
+        "steamclient",
+        "steamcmd",
+        "trixie"
     ]
 }

@@ -1,14 +1,26 @@
 #!/bin/bash
+set -eu
 
-echo -n "Enter steam username: "
-read -r s_username
+if [ -n "${LL_STEAM_USERNAME:-}" ]; then
+    s_username="$LL_STEAM_USERNAME"
+    echo "Using Steam username from LL_STEAM_USERNAME env var."
+else
+    echo -n "Enter steam username: "
+    read -r s_username
+fi
 
-echo -n "Enter steam password: "
-read -rs s_password
+if [ -n "${LL_STEAM_PASSWORD:-}" ]; then
+    s_password="$LL_STEAM_PASSWORD"
+    echo "Using Steam password from LL_STEAM_PASSWORD env var."
+else
+    echo -n "Enter steam password: "
+    read -rs s_password
+    echo
+fi
 
 docker pull lacledeslan/steamcmd:linux;
 
-docker pull debian:bullseye-slim;
+docker pull debian:trixie-slim;
 
 docker build -f ./linux.Dockerfile . -t lacledeslan/gamesvr-goldsource --build-arg BUILDNODE="$HOSTNAME" --build-arg STEAM_USERNAME="$s_username" --build-arg STEAM_PASSWORD="$s_password";
 

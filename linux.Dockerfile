@@ -72,7 +72,7 @@ RUN echo 90 > /output/steam_appid.txt;
 COPY ./dist/linux /output
 
 #####=======================================================================
-FROM debian:trixie-slim
+FROM debian:bookworm-slim
 
 ARG BUILDNODE="unspecified"
 ARG SOURCE_COMMIT

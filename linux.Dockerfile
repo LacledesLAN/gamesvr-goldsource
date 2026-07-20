@@ -1,16 +1,18 @@
 FROM lacledeslan/steamcmd:linux AS goldsource-builder
 
-ARG STEAM_USERNAME
-ARG STEAM_PASSWORD
+ARG STEAM_USERNAME \
+    STEAM_PASSWORD
 
 USER SteamCMD
 
 RUN if [ -z "$STEAM_USERNAME" ]; then echo "Missing steam username"; exit 111; elif [ -z "$STEAM_PASSWORD" ]; then echo "Missing steam password"; exit 222; fi
 
 # Counter-Strike 1.6 Assets (not compressed)
+
 RUN wget -r -nH --no-verbose --cut-dirs=2 --no-parent --reject="index.htm*, *.md" -e robots=off --directory-prefix="/output/cstrike/" "http://content.lacledeslan.net/fastDownloads/goldsrc-cstrike/"
 
 # Make sure SteamCMD is up to date (cuts down on log output noise)
+
 RUN /app/steamcmd.sh +force_install_dir /output +quit;
 
 RUN echo $'<Counter-Strike 1.6>\n' && \
@@ -69,11 +71,15 @@ RUN echo 90 > /output/steam_appid.txt;
 
 COPY ./dist/linux /output
 
-#####=======================================================================
+####
+
+
+#---------------------------------
 FROM debian:bookworm-slim
 
-ARG BUILD_NODE=unspecified
-ARG GIT_REVISION=unspecified
+ARG BUILD_DATE=unspecified \
+    BUILD_NODE=unspecified \
+    GIT_REVISION=unspecified
 
 HEALTHCHECK NONE
 
@@ -82,12 +88,13 @@ ENV LANG=en_US.UTF-8 \
     LC_ALL=en_US.UTF-8
 
 LABEL architecture="i386" \
-    com.lacledeslan.build-node="$BUILD_NODE" \
-    maintainer="Laclede's LAN <contact@lacledeslan.com>" \
-    org.opencontainers.image.description="Gold-Source Dedicated Server for running Counter-Strike 1.6, Day of Defeat, Half-Life 1 Deathmatch, Team Fortress Classic, and others!" \
-    org.opencontainers.image.revision="$GIT_REVISION" \
-    org.opencontainers.image.source="https://github.com/LacledesLAN/gamesvr-goldsource" \
-    org.opencontainers.image.vendor="Laclede's LAN"
+      com.lacledeslan.build-node="$BUILD_NODE" \
+      maintainer="Laclede's LAN <contact@lacledeslan.com>" \
+      org.opencontainers.image.created="$BUILD_DATE" \
+      org.opencontainers.image.description="Gold-Source Dedicated Server for running Counter-Strike 1.6, Day of Defeat, Half-Life 1 Deathmatch, Team Fortress Classic, and others!" \
+      org.opencontainers.image.revision="$GIT_REVISION" \
+      org.opencontainers.image.source="https://github.com/LacledesLAN/gamesvr-goldsource" \
+      org.opencontainers.image.vendor="Laclede's LAN"
 
 RUN dpkg --add-architecture i386 && \
     apt-get update && apt-get install -y \

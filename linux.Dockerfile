@@ -1,7 +1,7 @@
 FROM lacledeslan/steamcmd:linux AS goldsource-builder
 
-ARG STEAM_USERNAME \
-    STEAM_PASSWORD
+ARG STEAM_PASSWORD \
+    STEAM_USERNAME
 
 USER SteamCMD
 

@@ -5,7 +5,7 @@ person shooter game Half-Life. This GoldSrc Docker image includes dedicated serv
 Strike 1.6, Counter-Strike: Condition Zero, Day of Defeat, Deathmatch Classic, Half-Life Deathmatch, Half-Life:
 Opposing Force, Ricochet, and Team Fortress Classic.
 
-![GoldSrc](https://raw.githubusercontent.com/LacledesLAN/gamesvr-goldsource/master/Documentation/media/heading.jpg "GoldSrc")
+![GoldSrc](https://raw.githubusercontent.com/LacledesLAN/gamesvr-goldsource/main/Documentation/media/heading.jpg "GoldSrc")
 
 This repository is maintained by [Laclede's LAN](https://lacledeslan.com). Its contents are intended to be bare-bones
 and used as a stock server. For examples of building a customized server from this Docker image browse its related
@@ -166,8 +166,8 @@ docker run -it --rm lacledeslan/gamesvr-goldsource ./ll-tests/gamesvr-goldsource
 
 [Docker](https://docs.docker.com/) is an open-source project that bundles applications into lightweight, portable, self-
 sufficient containers. For a crash course on running Dockerized game servers check out [Using Docker for Game
-Servers](https://github.com/LacledesLAN/README.1ST/blob/master/GameServers/DockerAndGameServers.md). For tips, tricks,
+Servers](https://github.com/LacledesLAN/README.1ST/blob/main/GameServers/DockerAndGameServers.md). For tips, tricks,
 and recommended tools for working with Laclede's LAN Dockerized game server repos see the guide for [Working with our
-Game Server Repos](https://github.com/LacledesLAN/README.1ST/blob/master/GameServers/WorkingWithOurRepos.md). You can
+Game Server Repos](https://github.com/LacledesLAN/README.1ST/blob/main/GameServers/WorkingWithOurRepos.md). You can
 also browse all of our other Dockerized game servers: [Laclede's LAN Game Servers
-Directory](https://github.com/LacledesLAN/README.1ST/tree/master/GameServers).
+Directory](https://github.com/LacledesLAN/README.1ST/tree/main/GameServers).
